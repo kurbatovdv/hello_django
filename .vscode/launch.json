@@ -12,7 +12,8 @@
             "program": "${workspaceFolder}\\manage.py",
             "args": [
                 "runserver",
-                "--noreload"
+                "--noreload",
+                "192.168.4.2:3000"
             ],
             "django": true
         }
