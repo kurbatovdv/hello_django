@@ -5,8 +5,6 @@
 # tags from Docker Hub.
 FROM python:3
 
-MAINTAINER Dmitriy Kurbatov
-
 # If you prefer miniconda:
 #FROM continuumio/miniconda3
 
