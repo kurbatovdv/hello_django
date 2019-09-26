@@ -2,7 +2,10 @@ import re
 from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
+from django_tables2 import RequestConfig
 from django.contrib.auth.decorators import login_required
+from .models import Shop
+from .tables import ShopTable
 
 # Replace the existing home function with the one below
 @login_required
@@ -26,3 +29,8 @@ def hello_there(request, name):
             'date': datetime.now()
         }
     )
+
+def shops(request):
+    table = ShopTable(Shop.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, "hello/shops.html", {'shops': table})

@@ -5,6 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
 </head>
 
 <body>
@@ -13,7 +14,7 @@
     <a href="{% url 'about' %}" class="navbar-item">О Нас</a>
     <a href="{% url 'contact' %}" class="navbar-item">Контакты</a>
     {% if user.is_authenticated %}
-    <span>User: {{ user.get_username }}
+    <span>User: {{ user.get_usrname }}
      <a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>
    {% else %}
    <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>
