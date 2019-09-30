@@ -19,8 +19,9 @@ from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path("", include("hello.urls")),
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path("admin/", admin.site.urls),
+    path("", include("hello.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -6,6 +6,10 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
     <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext'  type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 </head>
 
 <body>
@@ -13,8 +17,9 @@
     <a href="{% url 'home' %}" class="navbar-brand">ИТ АЮСС</a>
     <a href="{% url 'about' %}" class="navbar-item">О Нас</a>
     <a href="{% url 'contact' %}" class="navbar-item">Контакты</a>
+    <a href="{% url 'shops' %}" class="navbar-item">Магазины</a>
     {% if user.is_authenticated %}
-    <span>User: {{ user.get_usrname }}
+    <span>User: {{ user.get_full_name }}
      <a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>
    {% else %}
    <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>

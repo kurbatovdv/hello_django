@@ -3,9 +3,11 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from django_tables2 import RequestConfig
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import Shop
 from .tables import ShopTable
+from .forms import ShopForm
 
 # Replace the existing home function with the one below
 @login_required
@@ -22,8 +24,7 @@ def contact(request):
 @login_required
 def hello_there(request, name):
     return render(
-        request,
-        'hello/hello_there.html',
+        request,        'hello/hello_there.html',
         {
             'name': name,
             'date': datetime.now()
@@ -34,3 +35,15 @@ def shops(request):
     table = ShopTable(Shop.objects.all())
     RequestConfig(request).configure(table)
     return render(request, "hello/shops.html", {'shops': table})
+
+@login_required
+def shop_new(request):
+    if request.method == "POST":
+         form = ShopForm(request.POST)
+         if form.is_valid():
+             form.save()
+             return redirect('shops')    
+    else:
+         form = ShopForm()
+    
+    return render(request, 'hello/shop_edit.html', {'form': form})
