@@ -3,18 +3,22 @@
 # OS Support also exists for jessie & stretch (slim and full).
 # See https://hub.docker.com/r/library/python/ for all supported Python
 # tags from Docker Hub.
-FROM python:3
+FROM python:3-stretch
 
 # If you prefer miniconda:
 #FROM continuumio/miniconda3
 
-LABEL Name=hello_django Version=0.0.1
+LABEL Name=hello_django Version=0.0.2
 EXPOSE 3000
 
 # Indicate where uwsgi.ini lives
 ENV UWSGI_INI uwsgi.ini
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
-RUN apt-get update -y && apt-get install libldap2-dev libsasl2-dev ldap-utils -y
+RUN apt-get update -y && apt-get upgrade -y \
+    && apt-get install libldap2-dev libsasl2-dev ldap-utils curl gnupg apt-transport-https liblttng-ust0 -y \
+    && wget https://github.com/PowerShell/PowerShell/releases/download/v6.2.3/powershell_6.2.3-1.debian.9_amd64.deb \
+    && dpkg -i powershell_6.2.3-1.debian.9_amd64.deb
 
 WORKDIR /app
 ADD . /app

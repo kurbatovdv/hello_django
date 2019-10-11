@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+import datetime
 
 # Create your models here.
 class Filial(models.Model):
@@ -36,12 +38,14 @@ class License_Astor(models.Model):
 class Shop(models.Model):
     number = models.PositiveSmallIntegerField('Номер магазина', unique=True)
     address = models.CharField('Адрес магазина', max_length=80)
-    filial = models.ForeignKey(Filial, on_delete=models.CASCADE, verbose_name='Филиал')
-    provider = models.ForeignKey(Provider, on_delete=models.PROTECT, verbose_name='Провайдер')
-    speed = models.DecimalField('Скорость', max_digits=4, decimal_places=1, null=True)
-    tel_number = models.CharField('Номер телефона', max_length=20)
+    filial = models.ForeignKey(Filial, on_delete=models.CASCADE, verbose_name='Филиал', blank=True)
+    provider = models.ForeignKey(Provider, on_delete=models.PROTECT, verbose_name='Провайдер', blank=True)
+    speed = models.DecimalField('Скорость', max_digits=4, decimal_places=1, null=True, blank=True)
+    tel_number = models.CharField('Номер телефона', max_length=20, blank=True)
     kass_count = models.PositiveSmallIntegerField('Количество касс', default=1)
-    license_astor = models.OneToOneField(License_Astor, on_delete=models.PROTECT, null=True, verbose_name='Лицензии Астор')
+    license_astor = models.OneToOneField(License_Astor, on_delete=models.PROTECT, null=True, verbose_name='Лицензии Астор', blank=True)
+    time_open = models.TimeField('Открытие', default=datetime.time(9, 00))
+    time_close = models.TimeField('Закрытие', default=datetime.time(20, 00))
 
     def __str__(self):
         return '%s %s' % (self.number, self.address)
