@@ -5,9 +5,9 @@ from django.shortcuts import render
 from django_tables2 import RequestConfig
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .models import Shop
-from .tables import ShopTable
-from .forms import ShopForm
+from .models import Shop, Cartridge_journal
+from .tables import ShopTable, CartridgeTable
+from .forms import ShopForm, CartridgeForm
 
 # Replace the existing home function with the one below
 @login_required
@@ -47,3 +47,20 @@ def shop_new(request):
          form = ShopForm()
     
     return render(request, 'hello/shop_edit.html', {'form': form})
+
+def cartridge_jornal(request):
+    table = CartridgeTable(Cartridge_journal.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, "hello/cartridge.html", {'cartridge': table})
+
+@login_required
+def cartridge_new(request):
+    if request.method == "POST":
+         form = CartridgeForm(request.POST)
+         if form.is_valid():
+             form.save()
+             return redirect('cartridge_jornal') 
+    else:
+         form = CartridgeForm()
+    
+    return render(request, 'hello/cartridge_edit.html', {'form': form})
