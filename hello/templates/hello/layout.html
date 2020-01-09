@@ -18,6 +18,7 @@
     <a href="{% url 'about' %}" class="navbar-item">О Нас</a>
     <a href="{% url 'contact' %}" class="navbar-item">Контакты</a>
     <a href="{% url 'shops' %}" class="navbar-item">Магазины</a>
+    <a href="{% url 'cartridge_jornal' %}" class="navbar-item">Учёт картриджей</a>
     {% if user.is_authenticated %}
     <span>User: {{ user.get_full_name }}
      <a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>

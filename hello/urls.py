@@ -10,4 +10,5 @@ urlpatterns = [
     path("shops/new", views.shop_new, name="shop_new"),
     path("cartridge/", views.cartridge_jornal, name="cartridge_jornal"),
     path("cartridge/new", views.cartridge_new, name="cartridge_new"),
+    path("cartridges/", views.cartridge_registration, name="cartridge_registration"),
 ]

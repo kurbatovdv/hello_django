@@ -80,7 +80,7 @@ class Department(models.Model):
 class Cartridge_journal(models.Model):
     cartridge = models.ForeignKey(Cartridge, on_delete=models.CASCADE, verbose_name='Картридж', blank=False)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел', blank=False)
-    time = models.DateTimeField('Время выдачи', default=datetime.date.today)
+    time = models.DateField('Дата выдачи', default=datetime.date.today)
 
     def __str__(self):
         return '%s %s %s' % (self.cartridge, self.department, self.time)

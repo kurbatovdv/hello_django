@@ -14,4 +14,11 @@ class CartridgeTable(tables.Table):
         # add class="paleblue" to <table> tag
         attrs = {'class': 'paleblue'}
         fields = ("cartridge", "department", "time" )
+
+class CartridgeRegistrationTable(tables.Table):
+    class Meta:
+        model = Cartridge_journal
+        # add class="paleblue" to <table> tag
+        attrs = {'class': 'paleblue'}
+        fields = ("cartridge", "department", "time" , "created_count")
     
