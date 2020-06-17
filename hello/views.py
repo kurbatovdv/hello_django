@@ -15,12 +15,14 @@ from django.db.models import Count, F
 def home(request):
     return render(request, "hello/home.html")
 
+
 def about(request):
     return render(request, "hello/about.html")
 
 
 def contact(request):
     return render(request, "hello/contact.html")
+
 
 @login_required
 def hello_there(request, name):
@@ -32,41 +34,47 @@ def hello_there(request, name):
         }
     )
 
+
 def shops(request):
     table = ShopTable(Shop.objects.all())
     RequestConfig(request).configure(table)
     return render(request, "hello/shops.html", {'shops': table})
 
+
 @login_required
 def shop_new(request):
     if request.method == "POST":
-         form = ShopForm(request.POST)
-         if form.is_valid():
-             form.save()
-             return redirect('shops')    
+        form = ShopForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('shops')
     else:
-         form = ShopForm()
-    
+        form = ShopForm()
+
     return render(request, 'hello/shop_edit.html', {'form': form})
+
 
 def cartridge_jornal(request):
     table = CartridgeTable(Cartridge_journal.objects.all())
     RequestConfig(request).configure(table)
     return render(request, "hello/cartridge.html", {'cartridge': table})
 
+
 @login_required
 def cartridge_new(request):
     if request.method == "POST":
-         form = CartridgeForm(request.POST)
-         if form.is_valid():
-             form.save()
-             return redirect('cartridge_jornal') 
+        form = CartridgeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cartridge_jornal')
     else:
-         form = CartridgeForm()
-    
+        form = CartridgeForm()
+
     return render(request, 'hello/cartridge_edit.html', {'form': form})
 
+
 def cartridge_registration(request):
-    table = CartridgeRegistrationTable(Cartridge_journal.objects.all().annotate(created_count=Count('id')))
+    table = CartridgeRegistrationTable(
+        Cartridge_journal.objects.all().annotate(created_count=Count('id')))
     RequestConfig(request).configure(table)
     return render(request, "hello/cartridge.html", {'cartridge': table})
